@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+  labels:
+    app: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: bednar1988/frontend:1.0
+#        imagePullPolicy: Never
+        ports:
+        - containerPort: 80
+        env:
+        - name: MONGODB_HOSTNAME
+          value: mongo-service
+        - name: MONGODB_USERNAME
+          value: root
+        - name: MONGODB_PASSWORD
+          value: password
