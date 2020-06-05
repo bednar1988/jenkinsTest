@@ -1,10 +1,11 @@
+import os
 from flask import Flask
 from flask import render_template
 from flask import request
 import pymongo
 
 app = Flask(__name__)
-myclient = pymongo.MongoClient('mongodb01.example.com',replicaset='labReplica',username='root',password='password',authSource='admin',authMechanism='SCRAM-SHA-256')
+myclient = pymongo.MongoClient(os.environ['MONGODB_HOSTNAME'],username=os.environ['MONGODB_USERNAME'],password=os.environ['MONGODB_PASSWORD'],authSource='admin',authMechanism='SCRAM-SHA-256')
 mydb = myclient["db01"]
 mycol = mydb["coll01"]
 
@@ -25,3 +26,6 @@ def submit_page():
     mydoc = {"name": form_fname, "surname": form_lname, "city": form_city, "age": form_age, "gender": form_gender}
     mycol.insert_one(mydoc)
     return home_page()
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=80)
