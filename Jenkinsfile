@@ -14,7 +14,7 @@ pipeline {
 
       }
       steps {
-        sh 'docker build -t bednar1988/frontend:latest .'
+        sh 'python --version'
       }
     }
 
