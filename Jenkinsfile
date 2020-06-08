@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('test docker image build') {
       steps {
-        sh 'ps -C "python webpage.py"'
+        sh 'python --version'
       }
     }
 
