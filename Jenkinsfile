@@ -6,9 +6,9 @@ pipeline {
 
   }
   stages {
-    stage('build docker image') {
+    stage('test docker image build') {
       steps {
-        sh 'python --version'
+        sh 'ps aux | grep webpage.py | grep -v grep'
       }
     }
 
